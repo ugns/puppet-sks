@@ -6,5 +6,3 @@ license       'Apache License, Version 2.0'
 summary       'Synchronizing Key Server (SKS) Puppet module'
 description   'Configure and manage the Synchronizing Key Server (SKS)'
 project_page  'https://github.com/UGNS/puppet-sks'
-
-dependency 'puppetlabs/stdlib'
