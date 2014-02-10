@@ -17,6 +17,4 @@ class sks::params {
       fail("${::operatingsystem} not supported")
     }
   }
-
-  $version = 'present'
 }
