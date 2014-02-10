@@ -16,5 +16,11 @@
 #
 # Example:
 # keyserver.linux.it 11370
-<% if @membership -%>
-<% end -%>
+<%- if @members and ! @members.empty? -%>
+  <%-[@members].flatten.compact.each do |member| -%>
+<%= member['hostname'] %> 11370
+    <%- if member['admin'] or member['email'] or member['keyid'] -%>
+# <%= member['admin'] %> <%=member['email'] %> <%= member['keyid'] %>
+    <%- end -%>
+  <% end %>
+<%- end -%>
