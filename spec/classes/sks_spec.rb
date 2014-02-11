@@ -90,6 +90,10 @@ describe 'sks' do
           },{
             'hostname' => 'sks.example.net',
             'keyid'    => '0xFEEDBEEF',
+          },{
+            'hostname' => 'keyserver.example.com',
+            'admin'    => 'J Edgar Hoover',
+            'keyid'    => '0x01234567',
           }],
         }}
         let(:facts) {{
@@ -107,6 +111,7 @@ describe 'sks' do
         it { should contain_file('/etc/sks/membership').with_content(/^# Jane Doe$/) }
         it { should contain_file('/etc/sks/membership').with_content(/^# <oscar@example.org> 0xABCDFE98$/) }
         it { should contain_file('/etc/sks/membership').with_content(/^# 0xFEEDBEEF$/) }
+        it { should contain_file('/etc/sks/membership').with_content(/^# J Edgar Hoover 0x01234567$/) }
       end
     end
   end
