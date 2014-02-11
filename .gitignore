@@ -2,4 +2,5 @@
 pkg
 spec/fixtures
 .rspec_system
+*.lock
 /metadata.json
