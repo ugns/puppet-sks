@@ -30,6 +30,9 @@ describe 'sks' do
         it { should contain_file('/etc/sks/sksconf').with_content(/^#recon_address: 0.0.0.0$/) }
         it { should contain_file('/etc/sks/sksconf').with_content(/^hkp_port: 11371$/) }
         it { should contain_file('/etc/sks/sksconf').with_content(/^#hkp_address: 0.0.0.0$/) }
+        it { should contain_file('/etc/sks/sksconf').with_content(/^#initial_stat:$/) }
+        it { should contain_file('/etc/sks/sksconf').with_content(/^pagesize:\s*16$/) }
+        it { should contain_file('/etc/sks/sksconf').with_content(/^ptree_pagesize:\s*16$/) }
 
         it { should contain_file('/etc/sks/membership').with({
               'ensure' => 'present',
@@ -45,14 +48,24 @@ describe 'sks' do
       describe "sks class with non-default parameters on #{osfamily}" do
         let(:node) { 'sks.example.com' }
         let(:params) {{
-          :server_contact => '0xDEADBEEF',
-          :recon_port     => 11372,
-          :recon_address  => '10.10.10.10',
-          :hkp_port       => 11373,
-          :hkp_address    => '10.10.10.10',
-          :members        => [{
+          :server_contact             => '0xDEADBEEF',
+          :recon_port                 => 11372,
+          :recon_address              => '10.10.10.10',
+          :hkp_port                   => 11373,
+          :hkp_address                => '10.10.10.10',
+          :members                    => [{
             'hostname' => 'keyserver.example.net',
           }],
+          :initial_stat               => true,
+          :disable_mailsync           => true,
+          :stat_hour                  => 18,
+          :membership_reload_interval => 1,
+          :pagesize                   => 32,
+          :ptree_pagesize             => 32,
+          :extra_options              => {
+            'debug'      => '',
+            'debuglevel' => 6,
+          },
         }}
         let(:facts) {{
           :osfamily => osfamily,
@@ -65,6 +78,14 @@ describe 'sks' do
         it { should contain_file('/etc/sks/sksconf').with_content(/^recon_address: 10.10.10.10$/) }
         it { should contain_file('/etc/sks/sksconf').with_content(/^hkp_port: 11373$/) }
         it { should contain_file('/etc/sks/sksconf').with_content(/^hkp_address: 10.10.10.10$/) }
+        it { should contain_file('/etc/sks/sksconf').with_content(/^initial_stat:$/) }
+        it { should contain_file('/etc/sks/sksconf').with_content(/^disable_mailsync:$/) }
+        it { should contain_file('/etc/sks/sksconf').with_content(/^stat_hour:\s+18$/) }
+        it { should contain_file('/etc/sks/sksconf').with_content(/^membership_reload_interval:\s+1$/) }
+        it { should contain_file('/etc/sks/sksconf').with_content(/^pagesize:\s*32$/) }
+        it { should contain_file('/etc/sks/sksconf').with_content(/^ptree_pagesize:\s*32$/) }
+        it { should contain_file('/etc/sks/sksconf').with_content(/^debug:\s*$/) }
+        it { should contain_file('/etc/sks/sksconf').with_content(/^debuglevel: 6$/) }
 
         it { should contain_file('/etc/sks/membership').with_content(/^keyserver.example.net 11372$/) }
       end

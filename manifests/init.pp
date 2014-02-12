@@ -38,16 +38,44 @@
 #     email:    SKS peer administrator's email address (optional)
 #     keyid:    SKS peer administrator's Key ID (optional)
 #
+# [*initial_stat*]
+#   Boolean to run database statistics on boot, Default is false
+#
+# [*disable_mailsync*]
+#   Boolean to to disable mailsync, Default is false
+#
+# [*stat_hour*]
+#   Hour to run database statistics on, Default is undef
+#
+# [*membership_reload_interval*]
+#   Number of hours to reload membership file, Default is undef
+#
+# [*pagesize*]
+#   bdb pagesize to use, Default is 16
+#
+# [*ptree_pagesize*]
+#   bdb pagesize for PTree/ptree, Default is 16
+#
+# [*extra_options*]
+#   Hash containing extra parameters to include in sksconf
+#
 class sks (
-  $version = present,
-  $hostname = $::fqdn,
-  $nodename = $::hostname,
-  $server_contact = undef,
-  $recon_address = undef,
-  $recon_port = 11370,
-  $hkp_address = undef,
-  $hkp_port = 11371,
-  $members = undef,
+  $version                    = present,
+  $hostname                   = $::fqdn,
+  $nodename                   = $::hostname,
+  $server_contact             = undef,
+  $recon_address              = undef,
+  $recon_port                 = 11370,
+  $hkp_address                = undef,
+  $hkp_port                   = 11371,
+  $members                    = undef,
+  $initial_stat               = false,
+  $disable_mailsync           = false,
+  $stat_hour                  = undef,
+  $membership_reload_interval = undef,
+  $pagesize                   = 16,
+  $ptree_pagesize             = 16,
+  $extra_options              = {},
 ) inherits sks::params {
 
   # validate parameters here

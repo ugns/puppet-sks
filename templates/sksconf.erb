@@ -46,12 +46,34 @@ hkp_port: <%= @hkp_port %>
 #sendmail_cmd: /usr/lib/sendmail -t -oi
 
 # Runs database statistics calculation on boot (time and cpu expensive)
+<%- if @initial_stat -%>
+initial_stat:
+<%- else -%>
 #initial_stat:
+<%- end -%>
+
+<%- if @disable_mailsync -%>
+disable_mailsync:
+<%- end -%>
+
+<%- if @stat_hour -%>
+stat_hour: <%= @stat_hour %>
+<%- end -%>
+
+<%- if @membership_reload_interval -%>
+membership_reload_interval: <%= @membership_reload_interval %>
+<%- end -%>
 
 # bdb's db_tune program suggests a pagesize of 65536 for [K]DB/key. In practice
 # this caused page deadlocks. I found 8K (16) and 16K (32) to be better values
-pagesize:          16
+pagesize:          <%= @pagesize %>
 #
 # The tuner recommended 4096 (8) for the pagesize for PTree/ptree. I have had
 # very good results with 8196
-ptree_pagesize:    16
+ptree_pagesize:    <%= @ptree_pagesize %>
+<%- if ! @extra_options.empty? -%>
+# Parameters set using 'extra_options'
+<% @extra_options.sort_by {|key,value| key}.each do |key,value| -%>
+<%= key %>:<% if value %> <%= value %><% end %>
+<% end -%>
+<% end -%>
