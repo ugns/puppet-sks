@@ -1,5 +1,5 @@
 name          'jbouse-sks'
-version       '0.1.0'
+version '0.1.1'
 source        'git@github.com:UGNS/puppet-sks.git'
 author        'jbouse'
 license       'Apache License, Version 2.0'
