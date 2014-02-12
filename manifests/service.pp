@@ -9,7 +9,7 @@ class sks::service {
   service { $sks::params::service_name:
     ensure     => running,
     enable     => true,
-    hasstatus  => true,
+    hasstatus  => false,
     hasrestart => true,
   }
 }
