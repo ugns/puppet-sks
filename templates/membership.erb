@@ -17,12 +17,13 @@
 # Example:
 # keyserver.linux.it 11370
 <%- if @members and ! @members.empty? -%>
-  <%- [@members].flatten.compact.each do |member| -%>
+<%-   [@members].flatten.compact.each do |member| -%>
+
 <%= member['hostname'] %> <% if member['port'] -%><%= member['port'] %><%- else -%><%= @recon_port %><% end %>
 <%-     if member['admin'] or member['email'] or member['keyid'] -%>
-#<%- if member['admin'] -%> <%= member['admin'] %><%- end -%>
-<%- if member['email'] -%> <<%= member['email'] %>><%- end -%>
-<%- if member['keyid'] -%> <%= member['keyid'] %><%- end -%>
-    <%- end %>
-  <%- end -%>
+#<%-      if member['admin'] -%> <%= member['admin'] %><%- end -%>
+<%-       if member['email'] -%> <<%= member['email'] %>><%- end -%>
+<%-       if member['keyid'] -%> <%= member['keyid'] %><%- end %>
+<%-     end -%>
+<%-   end -%>
 <%- end -%>
