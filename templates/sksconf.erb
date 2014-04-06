@@ -26,7 +26,7 @@ recon_address: <%= Array(@recon_address).join(' ')  %>
 recon_port: <%= @recon_port %>
 
 # Set hkp binding address
-<%- if @recon_address -%>
+<%- if @hkp_address -%>
 hkp_address: <%= Array(@hkp_address).join(' ')  %>
 <%- else -%>
 #hkp_address: 0.0.0.0
