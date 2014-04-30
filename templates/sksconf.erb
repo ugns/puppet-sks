@@ -71,7 +71,7 @@ pagesize:          <%= @pagesize %>
 # The tuner recommended 4096 (8) for the pagesize for PTree/ptree. I have had
 # very good results with 8196
 ptree_pagesize:    <%= @ptree_pagesize %>
-<%- if ! @extra_options.empty? -%>
+<%- if @extra_options -%>
 # Parameters set using 'extra_options'
 <% @extra_options.sort_by {|key,value| key}.each do |key,value| -%>
 <%= key %>:<% if value %> <%= value %><% end %>

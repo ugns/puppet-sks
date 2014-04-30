@@ -75,7 +75,7 @@ class sks (
   $membership_reload_interval = undef,
   $pagesize                   = 16,
   $ptree_pagesize             = 16,
-  $extra_options              = {},
+  $extra_options              = undef,
 ) inherits sks::params {
 
   # validate parameters here

@@ -33,6 +33,7 @@ describe 'sks' do
         it { should contain_file('/etc/sks/sksconf').with_content(/^#initial_stat:$/) }
         it { should contain_file('/etc/sks/sksconf').with_content(/^pagesize:\s*16$/) }
         it { should contain_file('/etc/sks/sksconf').with_content(/^ptree_pagesize:\s*16$/) }
+        it { should_not contain_file('/etc/sks/sksconf').with_content(/extra_options/) }
 
         it { should contain_file('/etc/sks/membership').with({
               'ensure' => 'present',
@@ -84,6 +85,7 @@ describe 'sks' do
         it { should contain_file('/etc/sks/sksconf').with_content(/^membership_reload_interval:\s+1$/) }
         it { should contain_file('/etc/sks/sksconf').with_content(/^pagesize:\s*32$/) }
         it { should contain_file('/etc/sks/sksconf').with_content(/^ptree_pagesize:\s*32$/) }
+        it { should contain_file('/etc/sks/sksconf').with_content(/extra_options/) }
         it { should contain_file('/etc/sks/sksconf').with_content(/^debug:\s*$/) }
         it { should contain_file('/etc/sks/sksconf').with_content(/^debuglevel: 6$/) }
 
